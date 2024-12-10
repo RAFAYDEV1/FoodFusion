@@ -15,7 +15,6 @@ import {
 import { createClient } from 'next-sanity'
 import Image from "next/image"
 
-// Sanity client setup
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, 
   dataset: 'production',
@@ -23,10 +22,9 @@ const client = createClient({
   useCdn: false, 
 })
 
-// Updated type for Top Selling Item
 type TopSellingItem = {
   _id: string
-  imageUrl: string // Now we directly get the image URL
+  imageUrl: string 
   name: string
 }
 
@@ -37,7 +35,7 @@ export function CarouselPlugin() {
     client
       .fetch(`*[_type == "topSellingItem"] | order(_createdAt desc) { _id, "imageUrl": image.asset->url, name }`)
       .then((data) => {
-        console.log('Top Selling Items:', data) // ✅ Check if imageUrl is being returned correctly
+        console.log('Top Selling Items:', data) 
         setTopSellingItems(data)
       })
       .catch(console.error)
@@ -66,6 +64,8 @@ export function CarouselPlugin() {
                 <CardContent className="flex-col h-[80vh] items-center justify-center p-0 relative">
                   <Image 
                     src={item.imageUrl} 
+                    width={1920}
+                    height={1280}
                     alt={`Top Selling Item ${index + 1}`} 
                     className="w-full h-full object-cover" 
                   />
