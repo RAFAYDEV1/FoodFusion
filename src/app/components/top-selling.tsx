@@ -3,9 +3,11 @@ import { CarouselPlugin } from "./mini-components/carousel";
 
 const TopSelling = () => {
   return (
-    <section className="h-[100vh] " id="top-selling">
-        <h1 className="text-center text-6xl mt-4 mb-8">Top Selling Items</h1>
-        <CarouselPlugin/>
+    <section className="min-h-screen py-8 px-4 overflow-x-hidden" id="top-selling">
+      <h1 className="text-center text-3xl md:text-4xl lg:text-6xl mb-8">
+        Top <span className="text-orange-500">Selling</span> Items
+      </h1>
+      <CarouselPlugin />
     </section>
   );
 };

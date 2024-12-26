@@ -3,12 +3,14 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
+import { CartProvider } from "./context/CartContext";
+import { Toaster } from "@/components/ui/sonner";
 
 const Chinese = localFont({
   src: "./fonts/go3v2.ttf",
-  variable : "--font-chinese",
-  weight: "100 900"
-})
+  variable: "--font-chinese",
+  weight: "100 900",
+});
 
 export const metadata: Metadata = {
   title: "Food Fusion",
@@ -22,12 +24,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className={`antialiased ${Chinese.variable} font-chinese`}
-      >
-        <Nav/>
-        {children}
-        <Footer/>
+      <body className={`antialiased ${Chinese.variable} font-chinese`}>
+        <CartProvider>
+          <Nav />
+          {children}
+        </CartProvider>
+        <Toaster/>
+        <Footer />
       </body>
     </html>
   );

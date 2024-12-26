@@ -1,4 +1,5 @@
 // import ContactForm from "./components/contact";
+import ContactForm from "./components/contact";
 import Hero from "./components/hero";
 import Review from "./components/review";
 import TopSelling from "./components/top-selling";
@@ -10,7 +11,7 @@ export default function Home() {
       <Hero/>
       <TopSelling/>    
       <Review/>
-      {/* <ContactForm/> */}
+      <ContactForm/>
     </div>
   );
 }
