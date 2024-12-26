@@ -56,7 +56,7 @@ export default function Menu() {
       });
   }, []);
 
-  const { addToCart, isCartOpen, toggleCart } = useCart();
+  const { addToCart} = useCart();
 
   const handleAddToCart = (item: {
     id: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { CartButton } from "./mini-components/sheet-button";
 import { Menu, X } from "lucide-react";
@@ -10,7 +10,7 @@ const Nav = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
     if (currentScrollY > lastScrollY) {
       setShowNavbar(false);
@@ -18,14 +18,14 @@ const Nav = () => {
       setShowNavbar(true);
     }
     setLastScrollY(currentScrollY);
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY, handleScroll]);
+  }, [handleScroll]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

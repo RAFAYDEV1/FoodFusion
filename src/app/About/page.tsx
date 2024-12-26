@@ -14,7 +14,7 @@ const AboutPage = () => {
         brings the rich and vibrant flavors of authentic Chinese cuisine to the
         heart of Karachi, Pakistan. Nestled in a cozy yet contemporary setting,
         this restaurant is a haven for food enthusiasts seeking a genuine taste
-        of China. Fusions Feast's menu offers a diverse selection of dishes, from
+        of China. Fusions Feast &apos menu offers a diverse selection of dishes, from
         the fiery heat of Sichuan specialties to the delicate balance of
         Cantonese dim sum, all crafted by skilled chefs using fresh,
         high-quality ingredients. The restaurant&apos;s signature dishes include

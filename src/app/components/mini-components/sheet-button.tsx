@@ -14,7 +14,7 @@ import {
 import { ShoppingCart } from "lucide-react";
 
 export function CartButton() {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const { cartItems, updateQuantity} = useCart();
 
   return (
     <Sheet>
