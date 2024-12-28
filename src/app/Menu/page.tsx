@@ -17,11 +17,16 @@ import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
   dataset: "production",
   apiVersion: "2023-12-10",
   useCdn: false,
 });
+
+// Add error handling for missing projectId
+if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+  console.warn('Warning: NEXT_PUBLIC_SANITY_PROJECT_ID is not defined');
+}
 
 type MenuItem = {
   _id: string;

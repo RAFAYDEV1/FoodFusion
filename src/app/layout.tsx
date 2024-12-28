@@ -13,7 +13,7 @@ const Chinese = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Food Fusion",
+  title: "Fusion Feast",
   description: "Authentic Chinese Restaraunt",
 };
 
