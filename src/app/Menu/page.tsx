@@ -32,6 +32,7 @@ type MenuItem = {
 };
 
 export default function Menu() {
+  
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
