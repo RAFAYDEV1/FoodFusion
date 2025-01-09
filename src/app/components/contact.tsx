@@ -8,7 +8,7 @@ function Form() {
   const [state, handleSubmit] = useForm("mjkvlkgk");
 
   if (state.succeeded) {
-    return <p className="text-center text-lg md:text-xl">Thanks for reaching out! We'll get back to you soon.</p>;
+    return <p className="text-center text-lg md:text-xl">Thanks for reaching out! We&apos;ll get back to you soon.</p>;
   }
 
   return (
