@@ -1,6 +1,7 @@
 import React from "react";
 import {Instagram, } from "lucide-react";
 import Link from "next/link";
+import { Logo } from "./mini-components/logo";
 
 const Footer = () => {
   return (
@@ -8,8 +9,8 @@ const Footer = () => {
       <div className="container px-4 md:px-5 py-6 md:py-8 mx-auto flex flex-col sm:flex-row items-center justify-between">
         <div className="flex flex-col sm:flex-row items-center">
           <a className="flex title-font font-medium items-center justify-center text-gray-900 mb-4 sm:mb-0">
-            <div className="rounded-full bg-orange-400 h-4 md:h-5 w-4 md:w-5"></div>
-            <span className="ml-2 md:ml-3 text-lg md:text-xl text-orange-400">Fusion Feast</span>
+            <Logo className="w-8 h-8" />
+            <span className="ml-2 md:ml-3 text-lg md:text-xl text-orange-400 font-bold tracking-widest">Fusion Feast</span>
           </a>
           <p className="text-xs md:text-sm text-gray-200 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 text-center sm:text-left">
             © 2024 Fusions Feast

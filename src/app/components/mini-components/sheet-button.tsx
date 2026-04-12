@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
+import { useState } from "react";
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
@@ -15,10 +15,53 @@ import { ShoppingCart } from "lucide-react";
 
 export function CartButton() {
   const { cartItems, updateQuantity } = useCart();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const totalAmount = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0) {
+      setError("Your cart is empty");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Call API to create checkout session
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: cartItems }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      // Redirect to Stripe Checkout using the session URL
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+    } catch (err: unknown) {
+      console.error('Checkout error:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong';
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   return (
     <Sheet>
@@ -79,15 +122,20 @@ export function CartButton() {
         <div className="text-white text-lg md:text-xl font-semibold mt-4 text-center">
           Total Amount: {totalAmount.toFixed(2)} Rupees
         </div>
+        {error && (
+          <div className="text-red-500 text-sm text-center mt-2 bg-red-100 p-2 rounded">
+            {error}
+          </div>
+        )}
         <SheetFooter className="mt-4">
-          <SheetClose asChild>
-            <Button
-              type="submit"
-              className="w-full tracking-widest bg-orange-500 hover:bg-orange-600 text-black text-sm md:text-base py-2 md:py-3"
-            >
-              Checkout
-            </Button>
-          </SheetClose>
+          <Button
+            type="button"
+            onClick={handleCheckout}
+            disabled={isLoading || cartItems.length === 0}
+            className="w-full tracking-widest bg-orange-500 hover:bg-orange-600 text-black text-sm md:text-base py-2 md:py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? 'Processing...' : 'Checkout'}
+          </Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
