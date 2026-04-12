@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-// Webhook secret for signature verification
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
 export async function POST(req: NextRequest) {
     try {
+        // Initialize Stripe
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+        // Webhook secret for signature verification
+        const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+
         const body = await req.text();
         const signature = req.headers.get('stripe-signature');
 
