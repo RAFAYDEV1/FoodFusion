@@ -13,28 +13,12 @@ const HeroBackground = () => {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Dynamic Animated Mesh / Orbs specifically for hero */}
-      <motion.div
-        animate={{
-          scale: [1, 2, 1],
-          opacity: [0.1, 0.3, 0.1],
-          rotate: [0, 90, 0]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-1/2 -left-1/4 w-[120%] h-[150%] bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-orange-600/30 via-red-900/10 to-transparent rounded-[100%] mix-blend-screen filter blur-[80px]"
-      />
-      <motion.div
-        animate={{
-          x: [0, 50, -50, 0],
-          y: [0, 100, -50, 0],
-          opacity: [0.1, 0.4, 0.1]
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 right-0 w-96 h-96 bg-red-600/30 rounded-full mix-blend-overlay filter blur-[100px]"
-      />
-      
-      {/* Falling or Rising Sparks Effect */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {/* Keep hero effects compositor-friendly and intentionally sparse. */}
+      <div className="absolute -top-1/2 -left-1/4 h-[150%] w-[120%] rounded-[100%] bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-orange-600/20 via-red-900/10 to-transparent blur-[80px]" />
+      <div className="absolute right-0 top-1/4 h-96 w-96 rounded-full bg-red-600/15 blur-[100px] motion-safe:animate-[background-drift-reverse_20s_ease-in-out_infinite]" />
+
+      {/* A small number of sparks avoids dozens of simultaneous animated layers. */}
+      {Array.from({ length: 8 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-3 rounded-full bg-gradient-to-t from-orange-500 to-yellow-300 shadow-[0_0_10px_rgba(249,115,22,0.8)]"
